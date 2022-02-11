@@ -1,5 +1,4 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { saveBook } = require("../controllers/user-controller");
 const { User, Book } = require("../models");
 const { signToken } = require("../utils/auth");
 
@@ -39,6 +38,7 @@ const resolvers = {
 
     addUser: async (parent, args) => {
       const user = await User.create(args);
+      console.log(user)
       const token = signToken(user);
 
       return { token, user };

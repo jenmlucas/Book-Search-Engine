@@ -8,10 +8,11 @@ import Auth from '../utils/auth';
 const SignupForm = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
-
   // set state for form validation
   const [validated] = useState(false);
+  
+  const [addUser] = useMutation(ADD_USER);
+
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
@@ -31,17 +32,17 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await addUser({
+      console.log(userFormData);
+      const  { data }  = await addUser({
         variables: {...userFormData}
       });
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      console.log(data);
+      
+      // const { token, user } = data;
+      console.log(data.addUser.token);
+      Auth.login(data.addUser.token);
     } catch (err) {
+      console.log('whatup')
       console.error(err);
       setShowAlert(true);
     }
