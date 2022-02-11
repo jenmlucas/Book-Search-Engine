@@ -8,8 +8,7 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("bookCount")
-          .populate("saveBook");
+          .populate("savedBooks");
 
         return userData;
       }
@@ -19,7 +18,7 @@ const resolvers = {
   },
 
   Mutation: {
-    login: async (parent, { email, password }) => {
+    loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -67,12 +66,7 @@ const resolvers = {
           { new: true, runValidators: true }
         );
 
-        if (!updatedUser) {
-          return res
-            .status(404)
-            .json({ message: "Couldn't find user with this id!" });
-        }
-        return res.json(updatedUser);
+        return updatedUser;
       }
     },
   },
