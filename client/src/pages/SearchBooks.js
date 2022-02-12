@@ -68,8 +68,8 @@ const SearchBooks = () => {
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
-
       const { items } = await response.json();
+      console.log(items)
 
       const bookData = items.map((book) => ({
         bookId: book.id,
@@ -77,6 +77,7 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || "",
+        link: book.volumeInfo.infoLink
       }));
 
       setSearchedBooks(bookData);
@@ -160,6 +161,7 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
+                  <a href={book.link}>Link to Google Books</a>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
