@@ -9,35 +9,36 @@ import {
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 import { GET_ME } from "../utils/queries";
-import { useQuery, useMutation,gql } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { REMOVE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   console.log("HEY line 17", data);
 
-  const [removeBook] = useMutation(REMOVE_BOOK, {
-    update(cache, { data: { removeBook } }) {
-      console.log(cache)
-      // console.log(data)
-      cache.modify({
-        fields: {
-          removeBookId(existingRemoveBookId = []) {
-            const newRemoveBookIdRef = cache.writeFragment({
-              data: removeBook,
-              fragment: gql`
-                fragment newRemoveBook on removeBook {
-                  id
-                  type
-                }
-              `,
-            });
-            return [...existingRemoveBookId, newRemoveBookIdRef];
-          },
-        },
-      });
-    },
-  });
+  const [removeBook] = useMutation(REMOVE_BOOK);
+  //   , {
+  //   update(cache, { data: { removeBook } }) {
+  //     console.log(cache)
+  //     // console.log(data)
+  //     cache.modify({
+  //       fields: {
+  //         removeBookId(existingRemoveBookId = []) {
+  //           const newRemoveBookIdRef = cache.writeFragment({
+  //             data: removeBook,
+  //             fragment: gql`
+  //               fragment newRemoveBook on removeBook {
+  //                 id
+  //                 type
+  //               }
+  //             `,
+  //           });
+  //           return [...existingRemoveBookId, newRemoveBookIdRef];
+  //         },
+  //       },
+  //     });
+  //   },
+  // });
 
   const userData = data?.me || {};
   console.log("HEY line 21", userData);
