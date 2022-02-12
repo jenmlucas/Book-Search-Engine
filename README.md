@@ -22,7 +22,7 @@ Coverted a Google Books API search engine that was built using a RESTful API int
 ## Usage
 This is what it will look like on your device. 
 
-![Deployed Link](https://booksearchengine-22.herokuapp.com/)
+[Deployed Link](https://booksearchengine-22.herokuapp.com/)
 
 ![Book Search Engine](./client/public/BSE.png)
 
