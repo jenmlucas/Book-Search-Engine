@@ -26,29 +26,7 @@ const SearchBooks = () => {
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
   const [saveBook] = useMutation(SAVE_BOOK);
-  //   , {
-  //   update(cache, { data: { saveBook } }) {
-  //     console.log(cache);
-  //     cache.modify({
-  //       fields: {
-  //         saveBookIds(existingSaveBookIds = []) {
-  //           const newSaveBookIdsRef = cache.writeFragment({
-  //             data: saveBook,
-  //             fragment: gql`
-  //               fragment newSaveBook on saveBook {
-  //                 id
-  //                 type
-  //               }
-  //             `,
-  //           });
-  //           return [...existingSaveBookIds, newSaveBookIdsRef];
-  //         },
-  //       },
-  //     });
-  //   },
-  // });
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);

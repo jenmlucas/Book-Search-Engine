@@ -14,35 +14,10 @@ import { REMOVE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
-  console.log("HEY line 17", data);
 
   const [removeBook] = useMutation(REMOVE_BOOK);
-  //   , {
-  //   update(cache, { data: { removeBook } }) {
-  //     console.log(cache)
-  //     // console.log(data)
-  //     cache.modify({
-  //       fields: {
-  //         removeBookId(existingRemoveBookId = []) {
-  //           const newRemoveBookIdRef = cache.writeFragment({
-  //             data: removeBook,
-  //             fragment: gql`
-  //               fragment newRemoveBook on removeBook {
-  //                 id
-  //                 type
-  //               }
-  //             `,
-  //           });
-  //           return [...existingRemoveBookId, newRemoveBookIdRef];
-  //         },
-  //       },
-  //     });
-  //   },
-  // });
 
   const userData = data?.me || {};
-  console.log("HEY line 21", userData);
-  // const userDataLength = Object.keys(userData).length;
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
