@@ -13,14 +13,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { REMOVE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
-  const { data } = useQuery(GET_ME);
-
+  const { loading, data } = useQuery(GET_ME);
+  console.log("HEY line 17", data)
   const [removeBook] = useMutation(REMOVE_BOOK);
-
-  const userData = data?.me || [];
-
-  // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  
+  const userData = data?.me || {};
+  console.log("HEY line 21", userData)
+  // const userDataLength = Object.keys(userData).length;
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -40,7 +39,7 @@ const SavedBooks = () => {
     }
   };
 
-  if (!userDataLength) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -53,9 +52,9 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? "book" : "books"
+          {userData.savedBooks?.length
+            ? `Viewing ${userData.savedBooks?.length} saved ${
+                userData.savedBooks?.length === 1 ? "book" : "books"
               }:`
             : "You have no saved books!"}
         </h2>
