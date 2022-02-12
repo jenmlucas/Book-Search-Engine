@@ -12,7 +12,7 @@ export const GET_ME = gql`
         authors
         description
         title
-        Image
+        image
         link
       }
     }

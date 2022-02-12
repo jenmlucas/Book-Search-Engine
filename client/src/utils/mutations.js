@@ -14,7 +14,7 @@ export const LOGIN_USER = gql`
           authors
           description
           title
-          Image
+          image
           link
         }
       }
@@ -35,7 +35,7 @@ export const ADD_USER = gql`
           authors
           description
           title
-          Image
+          image
           link
         }
       }
@@ -56,7 +56,7 @@ export const SAVE_BOOK = gql`
         authors
         description
         title
-        Image
+        image
         link
       }
     }
@@ -75,7 +75,7 @@ export const REMOVE_BOOK = gql`
         authors
         description
         title
-        Image
+        image
         link
       }
     }
